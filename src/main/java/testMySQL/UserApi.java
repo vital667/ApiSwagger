@@ -1,5 +1,7 @@
 package testMySQL;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -14,10 +16,13 @@ public class UserApi {
         this.userRepository = userRepository;
     }
 
+
+    @ApiOperation(value = "Test Api", notes="Check the correct operation of Api and connection")
     @GetMapping(path = "/echo")
     public String getEcho() {
         return "Echo 1.. 2.. 3..";
     }
+
 
     @GetMapping
     public @ResponseBody
@@ -25,9 +30,11 @@ public class UserApi {
         return userRepository.findAll();
     }
 
+
+    @ApiOperation(value = "Find user by id", notes="provide information about student by id")
     @GetMapping("/{id}")
     public @ResponseBody
-    Optional<User> getUserById(@PathVariable int id) {
+    Optional<User> getUserById(@ApiParam(value = "unique id of user", example = "5") @PathVariable int id) {
         return userRepository.findById(id);
     }
 
@@ -51,7 +58,7 @@ public class UserApi {
     }
 
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public @ResponseBody
     String deleteById(@PathVariable int id) {
         if (userRepository.findById(id).isPresent()) {

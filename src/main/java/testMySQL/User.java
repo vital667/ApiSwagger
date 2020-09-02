@@ -1,20 +1,33 @@
 package testMySQL;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@ApiModel("Personal data of User")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @ApiModelProperty("Name")
     private String name;
-
+    @ApiModelProperty("Email")
     private String email;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -31,5 +44,4 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
 }

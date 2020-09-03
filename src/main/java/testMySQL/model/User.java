@@ -1,7 +1,12 @@
-package testMySQL;
+package testMySQL.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +15,9 @@ import javax.persistence.Id;
 
 @Entity
 @ApiModel("Personal data of User")
+@Getter
+@Setter
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -17,31 +25,13 @@ public class User {
     private Integer id;
 
     @ApiModelProperty("Name")
+    @JsonProperty("nazwa")
+
     private String name;
     @ApiModelProperty("Email")
+    @JsonProperty("poczta_elektroniczna")
     private String email;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    @JsonIgnore
+    private Integer age;
 }
